@@ -1,0 +1,69 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:TJsonParser.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Width="620" Height="450"
+        WindowStartupLocation="CenterScreen"
+        x:Class="TJsonParser.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="TJsonParser">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid Margin="5" RowDefinitions="15*, 50, 3*, 10*">
+        <TextBox Grid.Row="0"
+                 Name="Txt_InputJson"
+                 DragDrop.AllowDrop="True"
+                 Text="{Binding InputJson}"
+                 AcceptsReturn="True" 
+                 VerticalAlignment="Stretch" 
+                 VerticalContentAlignment="Top"
+                 Watermark="Input json content or drop text file">
+        </TextBox>
+        <Grid Grid.Row="1" ColumnDefinitions="1*,1*,2*"
+              Margin="0, 5">
+            <TextBox Grid.Column="0"
+                     Text="{Binding AppVer}"
+                     VerticalAlignment="Stretch" 
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                     Watermark="appVer">
+            </TextBox>
+            <TextBox Grid.Column="1"
+                     Text="{Binding Platform}"
+                     Margin="5, 0"
+                     VerticalAlignment="Stretch" 
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                     Watermark="platform">
+            </TextBox>
+            <Button Grid.Column="2"
+                    Command="{Binding GoButtonClickCommand}"
+                    VerticalAlignment="Stretch" 
+                    HorizontalAlignment="Stretch">
+                GO
+            </Button>
+        </Grid>
+        <TextBox Grid.Row="2"
+                 Text="{Binding Result1}"
+                 VerticalAlignment="Stretch" 
+                 VerticalContentAlignment="Top"
+                 Watermark="Result 1">
+        </TextBox>
+        <TextBox Grid.Row="3"
+                 Text="{Binding Result2}"
+                 Margin="0, 5, 0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Stretch" 
+                 VerticalContentAlignment="Top"
+                 Watermark="Result 2">
+        </TextBox>
+    </Grid>
+</Window>

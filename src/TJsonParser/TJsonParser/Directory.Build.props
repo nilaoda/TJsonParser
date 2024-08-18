@@ -1,0 +1,53 @@
+<Project>
+    <!-- see: https://github.com/lixinyang123/AvaloniaAOT -->
+    <PropertyGroup>
+        <PublishAot>true</PublishAot>
+        <PublishTrimmed>true</PublishTrimmed>
+        <!--        <InvariantGlobalization>true</InvariantGlobalization>-->
+        <DebuggerSupport>false</DebuggerSupport>
+        <StripSymbols>true</StripSymbols>
+        <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+        <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+        <IlcTrimMetadata>true</IlcTrimMetadata>
+        <IlcGenerateStackTraceData>true</IlcGenerateStackTraceData>
+        <!--        <SatelliteResourceLanguages>en-US;zh-CN</SatelliteResourceLanguages>-->
+        <StripSymbols>true</StripSymbols>
+        <NoWarn>IL2057;IL2026;IL2104;IL3053</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
+        <UseAppHost>true</UseAppHost>
+    </PropertyGroup>
+
+    <!--    <ItemGroup Condition="'$(PublishAot)' == 'true' and '$(RuntimeIdentifier)' != 'win-arm64' and '$(RuntimeIdentifier)' != 'linux-arm64' and '$(RuntimeIdentifier)' != 'osx-arm64' and '$(RuntimeIdentifier)' != 'osx-x64'">
+            <PackageReference Include="PublishAotCompressed" Version="1.0.0" />
+        </ItemGroup>-->
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**" />
+        <None Remove=".gitignore" />
+    </ItemGroup>
+
+    <!-- Static Linked -->
+    <!--
+        https://github.com/AvaloniaUI/Avalonia/issues/9503
+        https://github.com/2ndlab/ANGLE.Static/releases
+        https://github.com/2ndlab/SkiaSharp.Static/releases
+    -->
+    <ItemGroup Condition="'$(PublishAot)' == 'true' and '$(RuntimeIdentifier)' == 'win-x64'">
+        <DirectPInvoke Include="libHarfBuzzSharp" />
+        <NativeLibrary Include="winlib\libHarfBuzzSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))" />
+        <DirectPInvoke Include="libSkiaSharp" />
+        <NativeLibrary Include="winlib\libSkiaSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))" />
+        <DirectPInvoke Include="av_libglesv2" />
+        <NativeLibrary Include="winlib\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(PublishAot)' == 'true'">
+        <!--This helps with theme dll-s trimming.
+        If you will publish your application in self-contained mode with p:PublishTrimmed=true and it will use Fluent theme Default theme will be trimmed from the output and vice versa.
+        https://github.com/AvaloniaUI/Avalonia/issues/5593 -->
+        <TrimmableAssembly Include="Semi.Avalonia" />
+    </ItemGroup>
+
+</Project>

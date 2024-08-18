@@ -1,0 +1,28 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="TJsonParser.App"
+             xmlns:local="using:TJsonParser"
+             xmlns:semi="https://irihi.tech/semi"
+             RequestedThemeVariant="Default">
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <semi:SemiTheme />
+    </Application.Styles>
+
+    <Application.Resources>
+        <FontWeight x:Key="ButtonDefaultFontWeight">500</FontWeight>
+        <FontWeight x:Key="CalendarItemCalendarButtonSelectedFontWeight">500</FontWeight>
+        <FontWeight x:Key="ExpanderHeaderFontWeight">500</FontWeight>
+        <FontWeight x:Key="ListBoxItemRadioGroupButtonFontWeight">500</FontWeight>
+        <FontWeight x:Key="ProgressBarTextFontWeight">500</FontWeight>
+        <FontWeight x:Key="RadioButtonButtonFontWeight">500</FontWeight>
+        <FontWeight x:Key="TabItemSelectedFontWeight">500</FontWeight>
+        <FontWeight x:Key="TextBlockTitleFontWeight">500</FontWeight>
+        <FontWeight x:Key="ToggleButtonDefaultFontWeight">500</FontWeight>
+    </Application.Resources>
+</Application>
